@@ -6,12 +6,12 @@ html.dark {
   @apply bg-black;
 }
 
-html.light {
-  @apply bg-white;
+html {
+  @apply bg-blue-100;
 }
 
 .wrapper {
-  @apply max-w-7xl mx-auto w-10/12;
+  @apply max-w-7xl m-auto w-10/12;
 }
 
 @layer base {
@@ -20,6 +20,14 @@ html.light {
   }
 
   p {
+    @apply dark:text-white text-black;
+  }
+
+  ul {
+    @apply dark:text-white text-black;
+  }
+
+  label {
     @apply dark:text-white text-black;
   }
 }
