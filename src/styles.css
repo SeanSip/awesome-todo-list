@@ -11,7 +11,7 @@ html {
 }
 
 .wrapper {
-  @apply max-w-7xl m-auto w-10/12;
+  @apply max-w-7xl mx-auto w-10/12;
 }
 
 @layer base {
