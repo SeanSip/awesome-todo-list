@@ -7,7 +7,7 @@ html.dark {
 }
 
 html {
-  @apply bg-blue-100;
+  @apply bg-blue-50/50;
 }
 
 .wrapper {
