@@ -49,6 +49,24 @@ function App() {
     return todos.length;
   }
 
+  function reorderTodos(draggedId, droppedId) {
+    setTodos(currentTodos => {
+      const draggedIndex = currentTodos.findIndex(
+        todo => todo.id === draggedId
+      );
+
+      const droppedIndex = currentTodos.findIndex(
+        todo => todo.id === droppedId
+      );
+
+      const newTodos = [...currentTodos];
+
+      newTodos.splice(draggedIndex, 1);
+      newTodos.splice(droppedIndex, 0, currentTodos[draggedIndex]);
+      return newTodos;
+    });
+  }
+
   console.log(totalTodos());
   console.log(todos);
 
@@ -79,12 +97,20 @@ function App() {
           {todos.map(todo => {
             return (
               <li
+                draggable="true"
+                onDragStart={e => e.dataTransfer.setData('text/plain', todo.id)}
+                onDragOver={e => e.preventDefault()}
+                onDrop={e => {
+                  e.preventDefault();
+                  const draggedId = e.dataTransfer.getData('text/plain');
+                  reorderTodos(draggedId, todo.id);
+                }}
                 key={todo.id}
                 className={`${
                   todo.completed
                     ? 'bg-stone-500/20 dark:bg-stone-500/40 '
                     : 'bg-lime-50/50 '
-                },flex break-words overflow-auto } flex justify-between w-full items-center border-2 border-black dark:border-white p-3 rounded-lg pr-12 md:pr-4 cursor-pointer`}
+                },flex break-words overflow-auto } flex justify-between w-full items-center border-2 border-black dark:border-white p-3 rounded-lg pr-12 md:pr-4 cursor-grab`}
                 onClick={() => toggoleTodo(todo.id, !todo.completed)}
               >
                 <input
